@@ -1,0 +1,133 @@
+---
+// FAQ — 6 questions using semantic <details>/<summary> accordion
+const faqs = [
+  {
+    q: "Does it work on iPhone and Android?",
+    a: "Yes — Kindred is a native app on both iOS and Android, with real-time sync between devices. iPad and Android tablet are supported in portrait mode; landscape is coming.",
+  },
+  {
+    q: "Do my partner or family need their own subscriptions?",
+    a: "No. One Premium subscription covers your whole household. Invite anyone you live with — they sign in free with their own account, you pay once. Everyone gets the AI features.",
+  },
+  {
+    q: "What happens to my data if I cancel?",
+    a: "Your meals, lists, and recipes stay safely in your account. You drop to the Free tier — full core features, minus the AI extras. Re-subscribe any time and everything comes back on instantly.",
+  },
+  {
+    q: "Is my household data private?",
+    a: 'Yes. Your data is yours, stored on Firebase (Google Cloud, UK/EU region). We don\'t sell it, show ads against it, or train AI on it. Full details in our <a href="/privacy">Privacy Policy</a>.',
+  },
+  {
+    q: "How does the AI meal planner work?",
+    a: "It reads what's already in your stock, what your household has eaten before, and any dietary notes you've added — then drafts a full week of meals. You approve the draft, shuffle individual days, or start fresh. If a draft fails or you decide not to use it, the AI credit is refunded automatically.",
+  },
+  {
+    q: "Can I cancel any time?",
+    a: "Yes — through the App Store or Play Store, one tap. No retention call, no email loop, no hidden cancellation fee. Your data stays safe on the Free tier after cancellation.",
+  },
+] as const;
+---
+
+<section class="faq section" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="faq__inner">
+      <h2 id="faq-heading" class="headline faq__heading">
+        Common questions.
+      </h2>
+
+      <div class="faq__list">
+        {faqs.map((item, i) => (
+          <details class="faq__item" name="faq">
+            <summary class="faq__question title-m" id={`faq-q-${i}`}>
+              <span class="faq__question-text">{item.q}</span>
+              <span class="faq__chevron" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="faq__answer body-copy" role="region" aria-labelledby={`faq-q-${i}`} set:html={item.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.faq__inner {
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.faq__heading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── details/summary accordion ──────────────────────────────────────────── */
+.faq__item {
+  border-bottom: 1px solid var(--color-divider);
+}
+.faq__item:first-child {
+  border-top: 1px solid var(--color-divider);
+}
+
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  list-style: none; /* remove default disclosure triangle */
+  -webkit-appearance: none;
+  user-select: none;
+  transition: color var(--motion-standard) var(--motion-curve);
+}
+/* Remove default triangle in all browsers */
+.faq__question::-webkit-details-marker { display: none; }
+.faq__question::marker { display: none; }
+
+.faq__question:hover {
+  color: var(--color-primary);
+}
+
+.faq__question-text {
+  flex: 1;
+  font-size: var(--text-body-size);
+  font-weight: 600;
+  color: inherit;
+}
+
+.faq__chevron {
+  flex-shrink: 0;
+  color: var(--color-ink-faint);
+  transition: transform var(--motion-standard) var(--motion-curve),
+              color var(--motion-standard) var(--motion-curve);
+}
+.faq__item[open] .faq__chevron {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.faq__answer {
+  padding: 0 0 1.25rem 0;
+  color: var(--color-ink-soft);
+  line-height: var(--line-height-normal);
+}
+.faq__answer a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.faq__answer a:hover {
+  opacity: 0.8;
+}
+</style>

@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import Pricing from '../components/Pricing.astro';
+import ScreenGallery from '../components/ScreenGallery.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Base
+  title="Kindred — Plan the week your household actually lives."
+  description="Kindred turns shared meals, the shopping list, and household chores into one calm weekly rhythm. Built for couples and families. iOS and Android."
+>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <main id="main-content" tabindex="-1">
+    <Hero />
+    <Features />
+    <Pricing />
+    <ScreenGallery />
+    <FAQ />
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+/* Skip link for keyboard / screen-reader users (WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 0;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-sm) 0;
+  z-index: 9999;
+  transition: top 0s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: none;
+}
+</style>

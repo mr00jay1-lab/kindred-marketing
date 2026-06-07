@@ -1,0 +1,129 @@
+@import './tokens.css';
+
+/* Google Fonts: Fraunces (display) + Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography helpers ──────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--text-display-size);
+  font-weight: var(--text-display-weight);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.headline {
+  font-family: var(--font-display);
+  font-size: var(--text-headline-size);
+  font-weight: var(--text-headline-weight);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+.title-l {
+  font-family: var(--font-body);
+  font-size: var(--text-title-l-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--line-height-snug);
+  color: var(--color-ink);
+}
+.title-m {
+  font-family: var(--font-body);
+  font-size: var(--text-title-m-size);
+  font-weight: var(--text-title-weight);
+  line-height: var(--line-height-snug);
+  color: var(--color-ink);
+}
+.body-copy {
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--line-height-normal);
+  color: var(--color-ink-soft);
+}
+.body-s {
+  font-size: var(--text-body-s-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--line-height-normal);
+  color: var(--color-ink-faint);
+}
+.label {
+  font-size: var(--text-label-size);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+/* ── Layout helpers ──────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+}
+.section {
+  padding-block: var(--section-gap-mobile);
+}
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--section-gap-desktop);
+  }
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-size);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity var(--motion-standard) var(--motion-curve),
+              transform var(--motion-standard) var(--motion-curve),
+              box-shadow var(--motion-standard) var(--motion-curve);
+  min-height: 52px; /* buttonHeight */
+  min-width: 48px;  /* tapTargetMin */
+}
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); opacity: 0.96; }
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-fab);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+}

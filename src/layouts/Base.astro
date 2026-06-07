@@ -1,0 +1,77 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Kindred turns shared meals, the shopping list, and "whose turn is it" into one calm weekly rhythm. Built for couples and families who\'d rather get on with their evening.',
+  ogImage = '/images/og-card.png',
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://kindredhome.app';
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageAbsolute = new URL(ogImage, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kindred household app" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Kindred" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+    <meta name="twitter:image:alt" content="Kindred household app" />
+
+    <!-- Favicon & app icons -->
+    <!-- TODO: replace placeholder references below with real icon files before launch -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#5F7363" />
+
+    <!-- Cloudflare Web Analytics -->
+    <!-- TODO: paste Cloudflare Web Analytics token here before launch.
+         Replace XXXXXXXXXXXX with your actual beacon token from
+         https://dash.cloudflare.com → Analytics & Logs → Web Analytics.
+         No cookie banner required — Cloudflare Web Analytics is cookieless
+         and GDPR-compliant without a consent mechanism.
+    -->
+    <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+         data-cf-beacon='{"token": "XXXXXXXXXXXX"}'></script> -->
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

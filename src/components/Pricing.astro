@@ -1,0 +1,215 @@
+---
+// Pricing — two columns: Free | Premium (highlighted)
+---
+
+<section class="pricing section" aria-labelledby="pricing-heading">
+  <div class="container">
+    <h2 id="pricing-heading" class="headline pricing__heading">
+      Simple, honest pricing.
+    </h2>
+    <p class="body-copy pricing__sub">
+      One subscription covers your whole household. Invite everyone you live with.
+    </p>
+
+    <div class="pricing__grid">
+
+      <!-- Free tier -->
+      <article class="pricing-card pricing-card--free" aria-label="Free plan">
+        <div class="pricing-card__header">
+          <h3 class="title-l pricing-card__tier">Free</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">£0</span>
+          </div>
+          <p class="body-s pricing-card__tagline">No credit card required.</p>
+        </div>
+
+        <ul class="pricing-card__features" aria-label="Free plan includes">
+          <li>Unlimited meals, shopping lists, chores, and recipes</li>
+          <li>Shared household for your whole family</li>
+          <li>Stock tracking — fridge, freezer &amp; pantry</li>
+          <li>Shared calendar slot-board</li>
+          <li>Everything you need to run one shared household</li>
+        </ul>
+
+        <a href="#" class="btn btn-ghost pricing-card__cta" aria-label="Download free — App Store and Play Store">
+          Download free
+        </a>
+        <!-- TODO: replace href="#" with App Store or Play Store link before launch -->
+      </article>
+
+      <!-- Premium tier -->
+      <article class="pricing-card pricing-card--premium" aria-label="Premium plan — recommended">
+        <div class="pricing-card__badge" aria-label="Recommended">Most popular</div>
+
+        <div class="pricing-card__header">
+          <h3 class="title-l pricing-card__tier">Premium</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">£4.99</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="body-s pricing-card__tagline">
+            or <strong>£39.99/year</strong> — save 33%. 14-day free trial on annual.
+          </p>
+        </div>
+
+        <ul class="pricing-card__features" aria-label="Premium plan includes">
+          <li>Everything in Free</li>
+          <li>AI meal planning — drafts your week from your stock</li>
+          <li>AI recipe extraction — paste a URL, get the recipe</li>
+          <li>AI image generation for your recipes</li>
+          <li>Priority sync across all devices</li>
+        </ul>
+
+        <p class="body-s pricing-card__topup">
+          Need more AI? Top up £1.99 any time.
+        </p>
+
+        <a href="#" class="btn btn-primary pricing-card__cta" aria-label="Start 14-day free trial — App Store and Play Store">
+          Start free trial
+        </a>
+        <!-- TODO: replace href="#" with App Store or Play Store link before launch -->
+
+        <p class="pricing-card__store-note body-s">
+          App Store and Play Store will show your local price.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.pricing__heading {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+.pricing__sub {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 44ch;
+  margin-inline: auto;
+}
+
+.pricing__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+@media (min-width: 600px) {
+  .pricing__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Pricing card ────────────────────────────────────────────────────────── */
+.pricing-card {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  border: 1.5px solid var(--color-divider);
+  box-shadow: var(--shadow-1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pricing-card--premium {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-fab);
+}
+
+/* "Most popular" badge */
+.pricing-card__badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--text-label-size);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.875rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.pricing-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pricing-card__tier {
+  color: var(--color-ink);
+}
+
+.pricing-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  margin-top: 0.25rem;
+}
+.pricing-card__amount {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1;
+}
+.pricing-card__period {
+  font-size: var(--text-body-s-size);
+  color: var(--color-ink-faint);
+}
+
+.pricing-card__tagline {
+  color: var(--color-ink-soft);
+}
+.pricing-card--premium .pricing-card__tagline strong {
+  color: var(--color-ink);
+}
+
+/* Feature list */
+.pricing-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.pricing-card__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: var(--text-body-s-size);
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+.pricing-card__features li::before {
+  content: '✓';
+  color: var(--color-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+.pricing-card__topup {
+  color: var(--color-ink-faint);
+  padding-top: 0.25rem;
+}
+
+.pricing-card__cta {
+  width: 100%;
+  text-decoration: none;
+}
+
+.pricing-card__store-note {
+  text-align: center;
+  color: var(--color-ink-faint);
+  margin-top: -0.5rem;
+}
+</style>

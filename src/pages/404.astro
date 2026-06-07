@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Base
+  title="Page not found — Kindred"
+  description="The page you're looking for doesn't exist."
+  noindex={true}
+>
+  <main class="not-found section" id="main-content" tabindex="-1">
+    <div class="container not-found__inner">
+      <p class="label not-found__code">404</p>
+      <h1 class="headline not-found__heading">Page not found.</h1>
+      <p class="body-copy not-found__body">
+        That page doesn't exist or has moved. Head back home to download Kindred.
+      </p>
+      <div class="not-found__actions">
+        <a href="/" class="btn btn-primary">Back to home</a>
+        <a href="mailto:support@kindredhome.app" class="btn btn-ghost">Contact support</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.not-found__inner {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.not-found__code {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-surface-soft);
+  line-height: 1;
+}
+.not-found__heading {
+  margin-top: -0.5rem;
+}
+.not-found__body {
+  max-width: 36ch;
+}
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+</style>
