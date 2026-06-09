@@ -74,9 +74,12 @@
 @media (min-width: 900px) { .nav__links { display: flex; } }
 
 /* ── Hero ───────────────────────────────────────────────── */
-.hero { background: var(--color-bg); background-image: var(--grad-hero-wash); overflow: hidden;
+.hero { position: relative; background: var(--color-bg); background-image: var(--grad-hero-wash); overflow: hidden;
   padding-top: clamp(3rem, 7vw, 5rem); padding-bottom: 2rem; }
-.hero__inner { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--page-padding);
+.hero__accent { position: absolute; z-index: 0; pointer-events: none;
+  width: min(620px, 60%); height: auto;
+  right: -80px; top: 50%; transform: translateY(-50%); opacity: 0.9; }
+.hero__inner { position: relative; z-index: 1; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--page-padding);
   display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
 .hero__title { font-family: var(--font-display); font-weight: var(--fw-medium); font-size: var(--text-hero);
   line-height: var(--lh-tight); letter-spacing: -0.025em; color: var(--color-ink); max-width: 16ch; }
@@ -89,6 +92,7 @@
   .hero__inner { grid-template-columns: 1.05fr 0.95fr; gap: 3.5rem; }
   .hero__visual { justify-content: flex-end; }
 }
+@media (max-width: 899px) { .hero__accent { opacity: 0.5; right: -140px; } }
 
 /* ── Phone frame ────────────────────────────────────────── */
 .phone { position: relative; background: #1A1815; border-radius: var(--bezel-radius); padding: 12px;
@@ -173,6 +177,13 @@
   .deep--reverse .deep__media { order: 2; }
 }
 
+/* Full-bleed marketing-scene variant (headline + phones baked into the image) */
+.deep__banner-inner { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+.deep__banner { width: 100%; max-width: 1000px; height: auto;
+  border-radius: var(--r-lg); box-shadow: var(--e2); }
+.deep__banner-extra:empty { display: none; }
+.deep__banner-extra { width: 100%; max-width: 1000px; }
+
 .slot-legend { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; justify-content: center;
   margin-top: 1rem; font-size: var(--text-micro); color: var(--color-ink-faint); }
 .slot-legend .sw { display: inline-flex; align-items: center; gap: 0.35rem; }
@@ -193,6 +204,10 @@
 .magic__cta { margin-top: 1.5rem; }
 .magic__media { display: flex; justify-content: center; }
 @media (min-width: 900px) { .magic__inner { grid-template-columns: 1fr 1fr; gap: 3rem; } .magic__media { order: 2; } }
+/* Full-bleed AI scene (cream image framed as a card on the navy band) */
+.magic__banner-inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+.magic__banner { width: 100%; max-width: 1000px; height: auto; border-radius: var(--r-lg); box-shadow: var(--e-frame); }
+.magic__banner-inner .magic__cta { margin-top: 0; }
 
 /* ── Gallery ────────────────────────────────────────────── */
 .gallery__head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; justify-content: space-between; }

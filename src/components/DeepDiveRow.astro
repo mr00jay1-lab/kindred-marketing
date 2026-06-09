@@ -11,12 +11,16 @@ export interface Props {
   features?: { label: string; desc: string }[];
   primary: { src: string; alt: string };
   secondary?: { src: string; alt: string };
+  // When set, the row renders this full-bleed marketing scene instead of the
+  // live phone stack. The scene already bakes in the eyebrow + headline, so the
+  // copy column is kept for SEO / screen readers but visually hidden.
+  banner?: { src: string; width?: number; height?: number };
 }
 const {
   id, band = 'cream', accent = 'var(--color-primary)', reverse = false,
-  eyebrow, title, body, features = [], primary, secondary,
+  eyebrow, title, body, features = [], primary, secondary, banner,
 } = Astro.props;
-const cls = `band band--${band} deep${reverse ? ' deep--reverse' : ''}`;
+const cls = `band band--${band} deep${reverse ? ' deep--reverse' : ''}${banner ? ' deep--banner' : ''}`;
 const hid = id ? `${id}-h` : undefined;
 ---
 <section
@@ -25,6 +29,24 @@ const hid = id ? `${id}-h` : undefined;
   style={`--accent: ${accent}; --accent-wash: color-mix(in srgb, ${accent} 14%, var(--color-surface))`}
   aria-labelledby={hid}
 >
+  {banner ? (
+    <div class="band__inner deep__banner-inner reveal">
+      <img class="deep__banner" src={banner.src}
+           width={banner.width ?? 1200} height={banner.height ?? 800}
+           alt="" aria-hidden="true" loading="lazy" />
+      <div class="visually-hidden">
+        <span class="eyebrow">{eyebrow}</span>
+        <h2 class="h2 deep__title" id={hid}>{title}</h2>
+        <p class="deep__body">{body}</p>
+        {features.length > 0 && (
+          <ul>
+            {features.map((f) => (<li><strong>{f.label}</strong> — {f.desc}</li>))}
+          </ul>
+        )}
+      </div>
+      <div class="deep__banner-extra"><slot name="extra" /></div>
+    </div>
+  ) : (
   <div class="band__inner deep__inner">
     <div class="deep__media reveal">
       <div class="deep__media-stack">
@@ -61,4 +83,5 @@ const hid = id ? `${id}-h` : undefined;
       <slot name="extra" />
     </div>
   </div>
+  )}
 </section>
