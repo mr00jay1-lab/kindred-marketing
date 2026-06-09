@@ -1,0 +1,34 @@
+---
+import Base from './Base.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import '../styles/site.css';
+export interface Props { title: string; heading: string; canonical: string; }
+const { title, heading, canonical } = Astro.props;
+---
+<Base title={title} description={`${heading} for Kindred — the household management app for iOS and Android.`} canonicalUrl={canonical}>
+  <main id="main-content" class="band band--cream" tabindex="-1">
+    <div class="band__inner" style="max-width: 780px;">
+      <p style="margin-bottom: 1.5rem;"><a class="btn-link" href="/">← Back to Kindred</a></p>
+      <article class="legal-prose"><slot /></article>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal-prose :global(h1) { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 500; color: var(--color-ink); line-height: var(--lh-snug); margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .legal-prose :global(h2) { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--color-ink); margin: 2rem 0 0.75rem; }
+  .legal-prose :global(h3) { font-weight: 600; color: var(--color-ink); margin: 1.5rem 0 0.5rem; }
+  .legal-prose :global(p) { color: var(--color-ink-soft); margin-bottom: 1rem; line-height: var(--lh-normal); }
+  .legal-prose :global(ul), .legal-prose :global(ol) { color: var(--color-ink-soft); margin: 0 0 1rem 1.4rem; }
+  .legal-prose :global(li) { margin-bottom: 0.4rem; list-style: disc; }
+  .legal-prose :global(ol li) { list-style: decimal; }
+  .legal-prose :global(a) { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+  .legal-prose :global(strong) { color: var(--color-ink); font-weight: 600; }
+  .legal-prose :global(blockquote) { border-left: 3px solid var(--color-primary-soft); padding: 0.5rem 1rem; background: var(--color-bg-soft); border-radius: var(--r-sm); margin: 1rem 0; color: var(--color-ink-soft); }
+  .legal-prose :global(hr) { border: none; border-top: 1px solid var(--color-divider); margin: 2rem 0; }
+  .legal-prose :global(table) { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: var(--text-body-s); }
+  .legal-prose :global(th), .legal-prose :global(td) { border: 1px solid var(--color-divider); padding: 0.5rem 0.7rem; text-align: left; }
+  .legal-prose :global(code) { background: var(--color-bg-soft); padding: 0.1rem 0.35rem; border-radius: var(--r-sm); font-size: 0.9em; }
+</style>
