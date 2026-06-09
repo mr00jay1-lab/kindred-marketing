@@ -1,53 +1,48 @@
-# 🌐 Kindred marketing site — live preview
+# 🌐 Kindred marketing site — LIVE
 
-## 👉 https://mr00jay1-lab.github.io/kindred-marketing/
+## 👉 https://kindredhome.app/
 
-Open it on your phone or desktop. Also try the full tour: **/features/**.
+**Live on the real apex domain** (since 2026-06-09). Also: the full tour at **/features**,
+and the staging mirror at https://mr00jay1-lab.github.io/kindred-marketing/.
 
-Built overnight (2026-06-08 → 09) as an autonomous session. Content-rich landing
-page at **cozi.com density**, rendered in Kindred's upgraded **"Modern Cozy V2"**
-style (navy `#001A57` / teal `#2BB98B` / coral `#FC7E50` brand layer over sage/cream).
+Content-rich landing page at **cozi.com density**, in Kindred's upgraded **"Modern Cozy V2"**
+style (navy `#001A57` / teal `#2BB98B` / coral `#FC7E50` over sage/cream). Built overnight
+(2026-06-08 → 09) as an autonomous session.
 
 ## What's on the page (17 sections)
-Sticky nav · hero (with the week calendar) · trust strip · "the mental load is real"
-empathy band · 3 differentiator pillars · **Meals & calendar** deep-dive · the navy
-**✨ AI Plan-next-week** magic band · real-screenshot **gallery** (with a Light/Dark
-toggle) · **Shopping & stock** deep-dive (+ 3-step flow) · **Chores** deep-dive ·
-**Recipes & AI** · **One household, one price** · **Pricing** (Free / Premium) ·
-**Trust** (private, no ads, UK-built) · **FAQ** (8 Q&As + schema.org rich-result JSON-LD)
-· final CTA · navy footer. Plus a `/features` full tour (all 17 app screenshots).
+Sticky nav · hero (week calendar) · "the mental load is real" empathy band · 3 differentiator
+pillars · **Meals & calendar** deep-dive · the navy **✨ AI Plan-next-week** magic band ·
+real-screenshot **gallery** (Light/Dark toggle) · **Shopping & stock** (+ 3-step flow) ·
+**Chores** · **Recipes & AI** · **One household, one price** · **Pricing** (Free / Premium) ·
+**Trust** · **FAQ** (8 Q&As + schema.org rich-result JSON-LD) · final CTA · navy footer.
+Plus a `/features` full tour (all 17 app screenshots). 20 real app screenshots, generated
+favicons + OG card. Designed by a 5-persona workflow; built parent-direct.
 
-Uses **20 real app screenshots** (the dark v0.3.0+30 set + 3 light shots), generated
-favicons, and an OG share card. Designed by a 5-persona workflow (content strategist,
-art director, information architect, copywriter, lead designer); built parent-direct.
+## How it's hosted (important)
+`kindredhome.app` is served by GitHub Pages from the **`mr00jay1-lab/kindred-legal`** repo
+(`docs/` on `main`, with the `CNAME`). The built marketing site lives there now (`.nojekyll`
++ the Astro `dist`), **replacing the old legal-only Jekyll site** — same domain, same cert,
+no DNS change.
 
-## ⚠️ This is a PREVIEW — three things to know
-1. **It's on a GitHub Pages preview URL, not `kindredhome.app`.** The brief's target is
-   Astro on **Cloudflare Pages** at the apex — that needs your Cloudflare login + DNS,
-   so it's your step (see `tasks/marketing_site_brief.md §3`). `/privacy` + `/terms`
-   are live here too.
-2. **Store badges are tasteful approximations, not official artwork**, and link to `#`
-   (the apps aren't public yet). Swap in the official Apple/Google badges + real store
-   URLs before launch (`src/components/StoreBadges.astro`).
-3. **OG/canonical tags point at `kindredhome.app`** (the real future home) — cosmetic on
-   this preview URL.
+- **Site SOURCE** → `mr00jay1-lab/kindred-marketing` (`main`). Edit + `npm run build` here.
+- **Apex DEPLOY** → copy this repo's `dist/*` into `kindred-legal/docs/` (keep `CNAME` +
+  `.well-known/assetlinks.json` + add `.nojekyll`), commit + push `kindred-legal` `main`.
+- `/privacy` + `/terms` render the canonical legal markdown (`src/legal/*.md`, synced from
+  the Kindred repo's `legal/`), so the store-referenced URLs are unchanged. App Links
+  `/.well-known/assetlinks.json` is preserved + still Google-verified.
 
-## How it's wired
-- **Source** → `main` branch (Astro project).
-- **Built site** → `gh-pages` branch (post-processed for the `/kindred-marketing` subpath
-  + `.nojekyll` so the `_astro/` assets serve). GitHub Pages serves `gh-pages` at root.
-- Design tokens: `src/styles/tokens.css` (mirrors `lib/ui/theme/app_colors_v2.dart`).
-  Site composition: `src/styles/site.css`.
+### ⚠️ New legal-edit flow (changed by the apex move)
+Legal edits now flow: Kindred repo `legal/*.md` (canonical) → copy into
+`kindred-marketing/src/legal/*.md` → `npm run build` → redeploy `dist` to `kindred-legal/docs`.
+(Previously you edited `kindred-legal/docs/privacy.md` directly under Jekyll.)
 
-## To iterate / redeploy
-```bash
-cd kindred-marketing
-npm run build                      # rebuild dist/
-# then re-run the subpath post-process + push gh-pages (see the agent's _postprocess_dist.cjs),
-# OR once on Cloudflare Pages at the apex, drop the subpath step entirely.
-```
+## Still to do before public launch (owner)
+- **Swap the placeholder store badges** (`src/components/StoreBadges.astro`) for official
+  Apple/Google artwork + real store URLs (they currently link to `#`; apps aren't public yet).
+- Optional: a dedicated marketing identity, real testimonials, a promo video.
+- The Cloudflare-Pages route in `marketing_site_brief.md` is now **optional** — the apex is
+  already served from GitHub. Move to Cloudflare later only if you want its analytics/edge.
 
-## To ship for real (production, per the brief)
-Create a Cloudflare Pages project from this repo (`main`, build `npm run build`, output
-`dist`), point `kindredhome.app` DNS at it, and the subpath post-process goes away (the
-apex serves from root). `/privacy` + `/terms` keep the same URLs.
+## Rollback
+If anything on the apex needs reverting: `git -C kindred-legal revert df20ba8` (or reset to
+`1fce9e6`) + push — restores the previous legal-only site.
