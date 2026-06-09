@@ -1,0 +1,29 @@
+---
+// Global sticky nav — rendered in Base.astro so it spans index + /features.
+---
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a class="nav__brand" href="/">Kindred</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="nav__link" href="/features">Features</a>
+      <a class="nav__link" href="/#how-it-works">How it works</a>
+      <a class="nav__link" href="/#recipes">Recipes &amp; AI</a>
+      <a class="nav__link" href="/#pricing">Pricing</a>
+      <a class="nav__link" href="/#faq">FAQ</a>
+    </nav>
+    <a class="nav__cta" href="/#final-cta">Get the app</a>
+  </div>
+</header>
+
+<script>
+  // Toggle the nav's scrolled state past the hero (background + shadow).
+  const nav = document.querySelector('[data-nav]');
+  if (nav) {
+    const onScroll = () => {
+      if (window.scrollY > 80) nav.setAttribute('data-scrolled', '');
+      else nav.removeAttribute('data-scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

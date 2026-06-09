@@ -1,99 +1,155 @@
 /*
- * Kindred "Modern Cozy" V2 design tokens — CSS custom properties
- * Translated from lib/ui/theme/app_colors_v2.dart + app_text_v2.dart + app_shape_v2.dart
- * DO NOT edit values here without also updating the Flutter token files in the app.
+ * Kindred Marketing — "Modern Cozy V2" + 2026-05-30 brand layer
+ * Source of truth: lib/ui/theme/app_colors_v2.dart + Design/kindred_redesign/kindred.css
+ * DO NOT change a hex here without updating those Flutter/CSS token files.
+ * Light-first; dark tokens auto-apply via prefers-color-scheme (site ships light).
  */
 
 :root {
-  /* ── Colour palette ─────────────────────────────────────────────────────── */
+  /* ── Cozy base (the calm) ───────────────────────────── */
+  --color-bg:            #FAF8F4;  /* cream — hero, odd sections, page base */
+  --color-bg-soft:       #F2EEE6;  /* soft cream — even sections (step-down) */
+  --color-surface:       #FFFFFF;  /* cards, phone screen, pricing cols */
+  --color-surface-soft:  #F2EEE6;  /* legacy alias (scaffold compat) */
+  --color-ink:           #26221E;  /* headings, emphasis */
+  --color-ink-soft:      #5A554F;  /* body / lead copy */
+  --color-ink-faint:     #6E695F;  /* captions, meta, dots */
+  --color-divider:       #E8E2DA;  /* hairlines, FAQ rows */
 
-  /* Backgrounds & surfaces */
-  --color-bg:           #FAF8F4;   /* app scaffold, off-white warm */
-  --color-surface:      #FFFFFF;   /* card / sheet surface */
-  --color-surface-soft: #F2EEE6;   /* section dividers, disabled bg */
+  /* ── Sage (calm CTAs / active) ──────────────────────── */
+  --color-primary:       #5F7363;
+  --color-primary-soft:  #9DAA8A;
+  --color-primary-wash:  #E9EDE4;
 
-  /* Primary (sage) */
-  --color-primary:      #5F7363;   /* CTAs, active states — 4.7:1 on bg (AA) */
-  --color-primary-soft: #9DAA8A;   /* chips, hovers, selected backgrounds */
-  --color-primary-wash: #E9EDE4;   /* selected-chip background (~12% sage) */
+  /* ── Warm single-use ────────────────────────────────── */
+  --color-terracotta:    #C76B4B;  /* the human note (Made in the UK) */
+  --color-secondary:     #C76B4B;  /* legacy alias (scaffold compat) */
 
-  /* Secondary / accent */
-  --color-secondary:    #C76B4B;   /* terracotta — single-use highlights */
+  /* ── Brand layer (the confidence) ───────────────────── */
+  --color-navy:          #001A57;  /* magic band, footer, emphasis */
+  --color-navy-2:        #0A2A72;  /* gradient stop */
+  --color-teal:          #2BB98B;  /* AI / magic / positive */
+  --color-teal-deep:     #1F8A6B;  /* teal text/icons on light */
+  --color-coral:         #FC7E50;  /* provenance / "remembers" */
+  --color-coral-deep:    #E5612F;  /* coral text/icons on light */
 
-  /* Brand layer (navy / teal / coral) */
-  --color-navy:         #001A57;   /* today / selected emphasis */
-  --color-teal:         #2BB98B;   /* plan-next-week magic, positive accents */
-  --color-coral:        #FC7E50;   /* provenance thread, single-use highlights */
+  /* washes (tinted accent grounds) */
+  --color-navy-wash:     #E7EAF2;
+  --color-teal-wash:     #E2F4EE;
+  --color-coral-wash:    #FDEEE6;
 
-  /* Text */
-  --color-ink:          #26221E;   /* body text 14:1 (AAA) */
-  --color-ink-soft:     #5A554F;   /* secondary text 6.7:1 */
-  --color-ink-faint:    #6E695F;   /* tertiary / captions / meta */
+  /* meal-slot flavour (gallery micro-legend only) */
+  --slot-breakfast:      #D69A2D;
+  --slot-lunch:          #2BB98B;
+  --slot-dinner:         #001A57;
+  --slot-chore:          #5F7363;
 
-  /* Dividers */
-  --color-divider:      #E8E2DA;   /* hairlines, input borders */
+  /* gradients */
+  --grad-magic:     linear-gradient(160deg, #001A57 0%, #0A2A72 100%);
+  --grad-hero-wash: radial-gradient(60% 50% at 18% 12%, #E2F4EE 0%, transparent 70%),
+                    radial-gradient(50% 45% at 88% 92%, #E9EDE4 0%, transparent 70%);
+  --grad-close:     linear-gradient(180deg, #FAF8F4 0%, #E7EAF2 100%); /* final-cta floor */
 
-  /* ── Typography ─────────────────────────────────────────────────────────── */
+  /* on-navy text (magic band + footer) */
+  --on-navy:        #F3EFEA;
+  --on-navy-soft:   rgba(243, 239, 234, .72);
+  --on-navy-line:   rgba(243, 239, 234, .12);
 
-  /* Font families */
-  --font-display:   'Fraunces', Georgia, serif;
-  --font-body:      'Inter', system-ui, -apple-system, sans-serif;
+  /* per-section accent hook (override inline per band) */
+  --accent:         var(--color-primary);
 
-  /* Type ramp (logical px) */
-  --text-display-size:   clamp(2rem, 5vw, 2.5rem);   /* 40px ≈ displayLarge */
-  --text-headline-size:  clamp(1.5rem, 3vw, 1.625rem); /* 26px headline */
-  --text-title-l-size:   1.25rem;   /* 20px titleLarge */
-  --text-title-m-size:   1.0625rem; /* 17px titleMedium */
-  --text-body-size:      1rem;      /* 16px body */
-  --text-body-s-size:    0.875rem;  /* 14px bodySmall */
-  --text-label-size:     0.75rem;   /* 12px labelSmall */
+  /* ── Type ───────────────────────────────────────────── */
+  --font-display:  'Fraunces', Georgia, serif;
+  --font-body:     'Inter', system-ui, -apple-system, sans-serif;
 
-  --text-display-weight: 500;
+  --text-hero:     clamp(2.5rem, 6vw, 4rem);       /* H1 40→64 */
+  --text-h2:       clamp(1.875rem, 4vw, 2.75rem);  /* section head 30→44 */
+  --text-h3:       1.25rem;                         /* card title 20 */
+  --text-price:    clamp(2.25rem, 4vw, 3rem);       /* 36→48 */
+  --text-lead:     clamp(1.0625rem, 2vw, 1.25rem);  /* 17→20 */
+  --text-body:     1rem;
+  --text-body-s:   0.875rem;
+  --text-micro:    0.8125rem;
+  --text-eyebrow:  0.75rem;
+
+  --fw-body: 400; --fw-medium: 500; --fw-semi: 600; --fw-bold: 700;
+  --lh-tight: 1.05; --lh-snug: 1.2; --lh-normal: 1.6;
+  --measure: 62ch;
+
+  /* ── Shape ──────────────────────────────────────────── */
+  --radius-sm: 8px;  --r-sm: 8px;
+  --radius-md: 18px; --r-md: 18px;
+  --radius-lg: 24px; --r-lg: 24px;
+  --radius-pill: 9999px; --r-pill: 9999px;
+  --bezel-radius: 44px;
+
+  /* ── Spacing ────────────────────────────────────────── */
+  --section-pad-y: 4.5rem;
+  --container-max: 1120px;
+  --page-max-width: 1120px;                 /* legacy alias */
+  --page-padding: clamp(1.25rem, 5vw, 3rem);
+  --grid-gap: 1.5rem;
+  --intro-max: 720px;
+
+  /* ── Elevation ──────────────────────────────────────── */
+  --e1: 0 1px 3px rgba(38,34,30,.07), 0 1px 2px rgba(38,34,30,.04);
+  --e2: 0 8px 28px rgba(38,34,30,.10);
+  --e-fab: 0 6px 18px rgba(95,115,99,.40);   /* sage glow on CTAs */
+  --e-frame: 0 24px 60px rgba(38,34,30,.18); /* phone mockup */
+  --shadow-1: var(--e1); --shadow-2: var(--e2); --shadow-fab: var(--e-fab); /* legacy aliases */
+
+  /* ── Motion ─────────────────────────────────────────── */
+  --motion-fast: 160ms;
+  --motion-standard: 240ms;
+  --motion-slow: 420ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: ease-in-out;
+  --motion-curve: var(--ease-standard); /* legacy alias */
+
+  /* ── Legacy type/spacing aliases (keep scaffold global.css + privacy/terms/404 resolving) ── */
+  --text-display-size:    var(--text-hero);
+  --text-headline-size:   var(--text-h2);
+  --text-title-l-size:    1.25rem;
+  --text-title-m-size:    1.0625rem;
+  --text-body-size:       1rem;
+  --text-body-s-size:     0.875rem;
+  --text-label-size:      0.75rem;
+  --text-display-weight:  500;
   --text-headline-weight: 500;
   --text-title-weight:    600;
   --text-body-weight:     400;
-
-  --line-height-tight:  1.15;
-  --line-height-snug:   1.3;
-  --line-height-normal: 1.5;
-
-  /* ── Shape & spacing ─────────────────────────────────────────────────────── */
-
-  --radius-sm: 8px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
-  --radius-pill: 9999px;
-
-  --card-padding-v: 18px;
-  --card-padding-h: 16px;
-  --card-gap: 14px;
-  --card-margin: 8px;
-
-  /* Section / page spacing */
-  --section-gap-mobile: 4rem;
-  --section-gap-desktop: 7rem;
-  --page-max-width: 1100px;
-  --page-padding: clamp(1.25rem, 5vw, 3rem);
-
-  /* ── Motion ─────────────────────────────────────────────────────────────── */
-
-  --motion-standard: 225ms;
-  --motion-curve: ease-in-out;
-
-  /* ── Elevation shadows ───────────────────────────────────────────────────── */
-
-  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.10);
-  --shadow-fab: 0 6px 20px rgba(95, 115, 99, 0.40);
+  --line-height-tight:    1.12;
+  --line-height-snug:     1.3;
+  --line-height-normal:   1.6;
+  --section-gap-mobile:   4rem;
+  --section-gap-desktop:  7rem;
 }
 
-/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root { --section-pad-y: 7rem; --grid-gap: 2rem; }
+}
+
+/* ── Dark mode (auto; ships light-first) ──────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #15181E; --color-bg-soft: #1A1E25; --color-surface: #1F242C;
+    --color-surface-soft: #2A303A; --color-ink: #ECEAE4; --color-ink-soft: #B7B3AB;
+    --color-ink-faint: #898680; --color-divider: #313842;
+    --color-primary: #8AA07C; --color-primary-soft: #6E8364; --color-primary-wash: #252E22;
+    --color-navy: #3A5BB8; --color-navy-2: #2A458F; --color-teal: #34C99A;
+    --color-teal-deep: #5FD9B4; --color-coral: #FF8E63; --color-coral-deep: #FF9E78;
+    --color-navy-wash: #1E2740; --color-teal-wash: #16291F; --color-coral-wash: #2E2017;
+    --grad-magic: linear-gradient(160deg, #1B2540 0%, #11203A 100%);
+    --grad-hero-wash: radial-gradient(60% 50% at 18% 12%, #16291F 0%, transparent 70%),
+                      radial-gradient(50% 45% at 88% 92%, #252E22 0%, transparent 70%);
+    --grad-close: linear-gradient(180deg, #15181E 0%, #1E2740 100%);
+    --on-navy: #ECEAE4; --on-navy-soft: rgba(236,234,228,.70); --on-navy-line: rgba(236,234,228,.10);
+    --e1: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+    --e2: 0 8px 28px rgba(0,0,0,.5); --e-frame: 0 24px 60px rgba(0,0,0,.6);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  :root {
-    --motion-standard: 0ms;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  :root { --motion-fast: 0ms; --motion-standard: 0ms; --motion-slow: 0ms; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }

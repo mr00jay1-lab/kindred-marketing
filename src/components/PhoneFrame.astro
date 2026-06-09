@@ -1,0 +1,18 @@
+---
+// Reusable iPhone frame around a 1179x2556 app screenshot.
+// variant: hero | gallery | small | magic | tilt | secondary
+export interface Props {
+  src: string;
+  alt: string;
+  variant?: string;
+  eager?: boolean;
+}
+const { src, alt, variant = 'gallery', eager = false } = Astro.props;
+---
+<div class={`phone phone--${variant}`}>
+  <div class="phone__screen">
+    {eager
+      ? <img src={src} alt={alt} width="1179" height="2556" loading="eager" fetchpriority="high" />
+      : <img src={src} alt={alt} width="1179" height="2556" loading="lazy" />}
+  </div>
+</div>

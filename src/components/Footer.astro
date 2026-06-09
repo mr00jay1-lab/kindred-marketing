@@ -1,90 +1,23 @@
 ---
-// Footer — legal links, copyright, support email
+import StoreBadges from './StoreBadges.astro';
 ---
-
 <footer class="footer" role="contentinfo">
-  <div class="container footer__inner">
-
-    <div class="footer__brand">
-      <!-- Kindred wordmark — rendered in Fraunces -->
-      <!-- TODO: replace with real SVG wordmark / logo once designed -->
-      <a href="/" class="footer__wordmark" aria-label="Kindred — home">
-        Kindred
-      </a>
-      <p class="footer__copy body-s">
-        &copy; 2026 Kindred. Made in the UK.
-      </p>
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer__brand-name">Kindred</div>
+        <p class="footer__tagline">One calm place for your shared meals, shopping and chores.</p>
+        <p class="footer__copy">© 2026 Kindred. <span class="dot" aria-hidden="true"></span> Made in the UK.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/features">Features</a>
+        <a href="mailto:support@kindredhome.app" aria-label="Email Kindred support">Support</a>
+      </nav>
     </div>
-
-    <nav class="footer__links" aria-label="Footer navigation">
-      <a href="/privacy" class="footer__link">Privacy</a>
-      <a href="/terms" class="footer__link">Terms</a>
-      <a
-        href="mailto:support@kindredhome.app"
-        class="footer__link"
-        aria-label="Email Kindred support"
-      >Support</a>
-    </nav>
-
+    <div class="footer__bottom">
+      <StoreBadges variant="footer" />
+    </div>
   </div>
 </footer>
-
-<style>
-.footer {
-  background: var(--color-surface-soft);
-  border-top: 1px solid var(--color-divider);
-  padding-block: 2.5rem;
-  margin-top: 0;
-}
-
-.footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.footer__brand {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.footer__wordmark {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: var(--color-ink);
-  text-decoration: none;
-  letter-spacing: -0.01em;
-  transition: opacity var(--motion-standard) var(--motion-curve);
-}
-.footer__wordmark:hover { opacity: 0.7; }
-
-.footer__copy {
-  color: var(--color-ink-faint);
-}
-
-.footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.5rem;
-  align-items: center;
-}
-
-.footer__link {
-  font-size: var(--text-body-s-size);
-  font-weight: 500;
-  color: var(--color-ink-soft);
-  text-decoration: none;
-  padding: 0.375rem 0;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  transition: color var(--motion-standard) var(--motion-curve);
-}
-.footer__link:hover {
-  color: var(--color-primary);
-}
-</style>

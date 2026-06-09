@@ -1,0 +1,64 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+export interface Props {
+  id?: string;
+  band?: string;            // cream | soft
+  accent?: string;          // CSS colour value
+  reverse?: boolean;        // media on the right
+  eyebrow: string;
+  title: string;
+  body: string;
+  features?: { label: string; desc: string }[];
+  primary: { src: string; alt: string };
+  secondary?: { src: string; alt: string };
+}
+const {
+  id, band = 'cream', accent = 'var(--color-primary)', reverse = false,
+  eyebrow, title, body, features = [], primary, secondary,
+} = Astro.props;
+const cls = `band band--${band} deep${reverse ? ' deep--reverse' : ''}`;
+const hid = id ? `${id}-h` : undefined;
+---
+<section
+  class={cls}
+  id={id}
+  style={`--accent: ${accent}; --accent-wash: color-mix(in srgb, ${accent} 14%, var(--color-surface))`}
+  aria-labelledby={hid}
+>
+  <div class="band__inner deep__inner">
+    <div class="deep__media reveal">
+      <div class="deep__media-stack">
+        <PhoneFrame src={primary.src} alt={primary.alt} variant="gallery" />
+        {secondary && (
+          <div class="phone phone--small phone--secondary">
+            <div class="phone__screen">
+              <img src={secondary.src} alt={secondary.alt} width="1179" height="2556" loading="lazy" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="deep__copy reveal">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 class="h2 deep__title" id={hid}>{title}</h2>
+      <p class="deep__body">{body}</p>
+      {features.length > 0 && (
+        <div class="deep__features">
+          {features.map((f) => (
+            <div class="feat">
+              <span class="feat__ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <div>
+                <div class="feat__label">{f.label}</div>
+                <div class="feat__desc">{f.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <slot name="extra" />
+    </div>
+  </div>
+</section>

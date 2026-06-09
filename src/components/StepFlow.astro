@@ -1,0 +1,18 @@
+---
+export interface Props {
+  accent?: string;
+  steps: { title: string; desc: string }[];
+  connected?: boolean;
+}
+const { accent = 'var(--color-primary)', steps, connected = true } = Astro.props;
+const cls = `steps${connected ? ' steps--connected' : ''}`;
+---
+<div class={cls} style={`--accent: ${accent}`}>
+  {steps.map((s, i) => (
+    <div class="step reveal">
+      <div class="step__n" aria-hidden="true">{i + 1}</div>
+      <div class="step__title">{s.title}</div>
+      <div class="step__desc">{s.desc}</div>
+    </div>
+  ))}
+</div>

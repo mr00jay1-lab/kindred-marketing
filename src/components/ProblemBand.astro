@@ -1,0 +1,27 @@
+---
+const questions = [
+  { q: 'What’s for dinner?', a: 'Sorted on Sunday, not improvised at six o’clock.' },
+  { q: 'Did we get milk?', a: 'On the list the moment one of you notices it’s gone.' },
+  { q: 'Whose turn is the bins?', a: 'Already decided, so nobody has to keep score.' },
+];
+---
+<section class="band band--navywash" style="--accent: var(--color-teal)" aria-labelledby="problem-h">
+  <div class="band__inner">
+    <div class="intro reveal">
+      <span class="eyebrow">The mental load is real</span>
+      <h2 id="problem-h" class="h2">Three questions every evening — and nobody remembers the answer.</h2>
+    </div>
+    <div class="problem__qs">
+      {questions.map((item) => (
+        <div class="problem__q reveal">
+          <p class="problem__qtext">{item.q}</p>
+          <p class="problem__qans">{item.a}</p>
+        </div>
+      ))}
+    </div>
+    <p class="problem__resolve reveal">
+      Kindred holds all three so your household doesn’t have to. One shared place,
+      on both your phones, kept in sync.
+    </p>
+  </div>
+</section>

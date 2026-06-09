@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Features from '../components/Features.astro';
+import GradientMagicBand from '../components/GradientMagicBand.astro';
+import RecipesBand from '../components/RecipesBand.astro';
+import HouseholdBand from '../components/HouseholdBand.astro';
+import TrustBand from '../components/TrustBand.astro';
+import StoreBadges from '../components/StoreBadges.astro';
+import PhoneFrame from '../components/PhoneFrame.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import '../styles/site.css';
+
+const tour = [
+  { src: '/images/01_calendar_week.png', cap: 'The week at a glance' },
+  { src: '/images/02_calendar_day.png', cap: 'A day in detail' },
+  { src: '/images/03_recipe_create_with_ai.png', cap: 'Create a recipe with AI' },
+  { src: '/images/04_recipe_edit_steps.png', cap: 'Edit recipe steps' },
+  { src: '/images/05_recipe_eligibility_exclusions.png', cap: 'Who a meal’s for' },
+  { src: '/images/06_ai_recipe_confirm_daily_cap.png', cap: 'AI recipe credits' },
+  { src: '/images/07_ai_image_confirm_daily_cap.png', cap: 'Generate a recipe photo' },
+  { src: '/images/08_shopping_list.png', cap: 'Shared shopping list' },
+  { src: '/images/09_stock_list.png', cap: 'Fridge, freezer & pantry' },
+  { src: '/images/10_stock_add_menu.png', cap: 'Add to your stock' },
+  { src: '/images/11_chores_list.png', cap: 'Today’s chores' },
+  { src: '/images/12_members.png', cap: 'Your household' },
+  { src: '/images/13_household_availability.png', cap: 'Who’s around' },
+  { src: '/images/14_household_mark_away.png', cap: 'Mark someone away' },
+  { src: '/images/15_member_diet_allergies.png', cap: 'Diet & allergies' },
+  { src: '/images/16_household_settings.png', cap: 'Household settings' },
+  { src: '/images/17_settings_switch_household.png', cap: 'Switch households' },
+];
+---
+<Base
+  title="Everything Kindred does — Kindred"
+  description="The whole of Kindred in one place — shared meal planning, a self-building shopping list, a real chore rota, recipes and the AI that ties it together."
+>
+  <main id="main-content" tabindex="-1">
+    <section class="band band--cream">
+      <div class="band__inner intro intro--left reveal">
+        <p style="margin-bottom:1rem"><a class="btn-link" href="/">← Back to home</a></p>
+        <h1 class="hero__title" style="max-width:18ch">Everything Kindred does.</h1>
+        <p class="lead">The whole app, in one place — meals, shopping, chores, recipes, and the AI that ties them together.</p>
+      </div>
+    </section>
+
+    <Features />
+    <GradientMagicBand />
+    <RecipesBand />
+    <HouseholdBand />
+
+    <section class="band band--cream" aria-labelledby="tour-h">
+      <div class="band__inner">
+        <div class="intro reveal">
+          <span class="eyebrow" style="--accent: var(--color-primary)">The full tour</span>
+          <h2 id="tour-h" class="h2">Every screen, nothing faked.</h2>
+          <p class="lead">Real captures from the app — exactly what you’ll open.</p>
+        </div>
+        <div class="gallery__grid">
+          {tour.map((f) => (
+            <figure class="gframe reveal">
+              <PhoneFrame src={f.src} alt={f.cap} variant="gallery" />
+              <figcaption class="gframe__cap">{f.cap}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <TrustBand />
+
+    <section class="band final" id="final-cta">
+      <div class="final__inner reveal">
+        <h2 class="final__title">Ready when you are.</h2>
+        <p class="final__sub">Free to start. Premium when you want the AI to do the planning.</p>
+        <div class="final__badges"><StoreBadges variant="final" center={true} /></div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

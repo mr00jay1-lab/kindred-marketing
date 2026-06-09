@@ -1,0 +1,32 @@
+---
+import StepFlow from './StepFlow.astro';
+import PhoneFrame from './PhoneFrame.astro';
+const steps = [
+  { title: 'Create your household', desc: 'Set up your shared home in under a minute.' },
+  { title: 'Invite your partner or family', desc: 'They sign in free — no card, no second subscription.' },
+  { title: 'Everyone shares the same plan', desc: 'One calendar, one list, one rota. You pay once.' },
+];
+---
+<section class="band band--navywash" style="--accent: var(--color-navy)" aria-labelledby="household-h">
+  <div class="band__inner">
+    <div class="intro reveal">
+      <h2 id="household-h" class="h2">One subscription covers everyone you live with.</h2>
+      <p class="lead">No, your partner doesn’t need their own. Invite anyone in your home — they join free, you subscribe once.</p>
+    </div>
+
+    <StepFlow accent="var(--color-navy)" steps={steps} />
+
+    <div class="recipes__frames reveal" style="margin-top:2.5rem">
+      <figure class="gframe">
+        <PhoneFrame src="/images/12_members.png" alt="Household members — invite anyone you live with" variant="small" />
+        <figcaption class="gframe__cap">Everyone in one household</figcaption>
+      </figure>
+      <figure class="gframe">
+        <PhoneFrame src="/images/17_settings_switch_household.png" alt="Switch between households you belong to" variant="small" />
+        <figcaption class="gframe__cap">Switch households any time</figcaption>
+      </figure>
+    </div>
+
+    <p class="recipes__more reveal"><a class="btn-link" href="#pricing">See pricing ↓</a></p>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import StoreBadges from './StoreBadges.astro';
+import TrustStrip from './TrustStrip.astro';
+---
+<section class="band final" id="final-cta" aria-labelledby="final-h">
+  <div class="final__inner reveal">
+    <h2 id="final-h" class="final__title">Get the week off your mind.</h2>
+    <p class="final__sub">Free to start. Premium when you want the AI to do the planning.</p>
+    <div class="final__badges">
+      <StoreBadges variant="final" center={true} />
+    </div>
+    <TrustStrip items={['UK-built', 'Private', 'No ads']} />
+  </div>
+  <div class="final__phone" aria-hidden="true">
+    <div class="phone phone--gallery phone--tilt">
+      <div class="phone__screen">
+        <img src="/images/02_calendar_day.png" alt="" width="1179" height="2556" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>

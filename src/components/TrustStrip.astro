@@ -1,0 +1,13 @@
+---
+export interface Props { items?: string[]; }
+const { items = ['Built in the UK', 'Privacy-first', 'No ads, ever'] } = Astro.props;
+---
+<div class="trust-strip">
+  <span class="dot" aria-hidden="true"></span>
+  {items.map((it, i) => (
+    <Fragment>
+      {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+      <span>{it}</span>
+    </Fragment>
+  ))}
+</div>

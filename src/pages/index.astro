@@ -1,48 +1,113 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ProblemBand from '../components/ProblemBand.astro';
 import Features from '../components/Features.astro';
-import Pricing from '../components/Pricing.astro';
+import DeepDiveRow from '../components/DeepDiveRow.astro';
+import GradientMagicBand from '../components/GradientMagicBand.astro';
 import ScreenGallery from '../components/ScreenGallery.astro';
+import RecipesBand from '../components/RecipesBand.astro';
+import HouseholdBand from '../components/HouseholdBand.astro';
+import StepFlow from '../components/StepFlow.astro';
+import Pricing from '../components/Pricing.astro';
+import TrustBand from '../components/TrustBand.astro';
 import FAQ from '../components/FAQ.astro';
+import FinalCta from '../components/FinalCta.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import '../styles/site.css';
+
+const mealFeatures = [
+  { label: 'Colour-coded slots', desc: 'Breakfast to dinner, each in its own shade.' },
+  { label: 'Who’s home, at a glance', desc: 'Member dots on every day you’ve planned.' },
+  { label: 'Day, week & month views', desc: 'Zoom out to the month or down to a single day.' },
+];
+const shoppingFeatures = [
+  { label: 'Recipe → list, automatically', desc: 'Only the ingredients you don’t already have.' },
+  { label: 'Fridge, freezer & pantry stock', desc: 'Kindred checks your shelves before it adds a thing.' },
+  { label: 'Skip now, back next week', desc: 'A skipped item returns instead of disappearing.' },
+  { label: 'See where each item came from', desc: 'Every line traces back to the recipe that asked for it.' },
+];
+const shoppingSteps = [
+  { title: 'Add a recipe', desc: 'Pick something to cook this week.' },
+  { title: 'Kindred finds what’s missing', desc: 'It checks your fridge, freezer and pantry.' },
+  { title: 'It’s on your list', desc: 'Only the things you actually need to buy.' },
+];
+const choreFeatures = [
+  { label: 'Recurring & rotating chores', desc: 'Set it once; it comes round on its own.' },
+  { label: 'Cooking counts as a chore', desc: 'Whoever’s on dinner is already pulling their weight.' },
+  { label: 'A gentle 09:00 digest', desc: 'One calm summary of the day, then it leaves you be.' },
+  { label: 'Mark anyone away', desc: 'Off for the week? Their turns skip until they’re back.' },
+];
 ---
 
 <Base
   title="Kindred — Plan the week your household actually lives."
-  description="Kindred turns shared meals, the shopping list, and household chores into one calm weekly rhythm. Built for couples and families. iOS and Android."
+  description="Kindred turns shared meals, the shopping list, and household chores into one calm weekly rhythm. AI plans the week, the shopping list builds itself, chores settle themselves. iOS and Android."
 >
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
   <main id="main-content" tabindex="-1">
     <Hero />
+
+    <section class="band--cream" style="padding-block:0">
+      <div class="band__inner"><TrustStrip /></div>
+    </section>
+
+    <ProblemBand />
     <Features />
-    <Pricing />
+
+    <DeepDiveRow
+      id="meals" band="cream" accent="var(--color-navy)"
+      eyebrow="Meals & the calendar"
+      title="A week you can read at a glance."
+      body="Meal slots are colour-coded across the day, from breakfast through to dinner, so the whole week reads in a single look. Member dots show who’s around. Tap any slot to add a meal or open the one that’s there. Meals live on a date and a slot — never a fiddly clock time you have to set."
+      features={mealFeatures}
+      primary={{ src: '/images/01_calendar_week.png', alt: 'Weekly calendar with colour-coded meal slots' }}
+      secondary={{ src: '/images/02_calendar_day.png', alt: 'A single day in detail with meal photos' }}
+    >
+      <div slot="extra" class="slot-legend">
+        <span class="sw"><i style="background:var(--slot-breakfast)"></i>Breakfast</span>
+        <span class="sw"><i style="background:var(--slot-lunch)"></i>Lunch</span>
+        <span class="sw"><i style="background:var(--slot-dinner)"></i>Dinner</span>
+        <span class="sw"><i style="background:var(--slot-chore)"></i>Chore</span>
+        <span>— a colour for every part of the day</span>
+      </div>
+    </DeepDiveRow>
+
+    <GradientMagicBand />
     <ScreenGallery />
+
+    <DeepDiveRow
+      id="how-it-works" band="soft" accent="var(--color-coral)" reverse={true}
+      eyebrow="Shopping & stock"
+      title="The list that builds itself — and remembers what you skipped."
+      body="Add a recipe and Kindred adds only what you’re missing, checking against what’s already in your fridge, freezer and pantry. Skip an item at the shop and it isn’t lost — it comes back on next week’s list. A coral thread shows which recipe each item came from, so nothing on the list is a mystery."
+      features={shoppingFeatures}
+      primary={{ src: '/images/08_shopping_list.png', alt: 'The shared shopping list with in-stock badges' }}
+      secondary={{ src: '/images/09_stock_list.png', alt: 'Fridge, freezer and pantry stock' }}
+    >
+      <div slot="extra" style="margin-top:1.5rem">
+        <StepFlow accent="var(--color-coral)" steps={shoppingSteps} connected={false} />
+      </div>
+    </DeepDiveRow>
+
+    <DeepDiveRow
+      id="chores" band="cream" accent="var(--color-primary)"
+      eyebrow="Chores & the daily digest"
+      title="Whose turn it is — settled, not argued."
+      body="Set chores to recur, assign or rotate them, and let everyone see what’s theirs today. Cooking a planned meal counts as its own chore automatically, so the person at the stove gets the credit. A gentle 09:00 digest nudges the day’s tasks — a quiet reminder, never a nag."
+      features={choreFeatures}
+      primary={{ src: '/images/11_chores_list.png', alt: 'Today’s chores, sorted' }}
+      secondary={{ src: '/images/13_household_availability.png', alt: 'Who’s around this week' }}
+    />
+
+    <RecipesBand />
+    <HouseholdBand />
+    <Pricing />
+    <TrustBand />
     <FAQ />
+    <FinalCta />
   </main>
 
   <Footer />
 </Base>
-
-<style>
-/* Skip link for keyboard / screen-reader users (WCAG 2.4.1) */
-.skip-link {
-  position: absolute;
-  top: -999px;
-  left: 0;
-  background: var(--color-primary);
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 0 0 var(--radius-sm) 0;
-  z-index: 9999;
-  transition: top 0s;
-}
-.skip-link:focus {
-  top: 0;
-  outline: none;
-}
-</style>
