@@ -26,7 +26,7 @@ const mealFeatures = [
 const shoppingFeatures = [
   { label: 'Recipe → list, automatically', desc: 'Only the ingredients you don’t already have.' },
   { label: 'Fridge, freezer & pantry stock', desc: 'Kindred checks your shelves before it adds a thing.' },
-  { label: 'Skip now, back next week', desc: 'A skipped item returns instead of disappearing.' },
+  { label: 'Nothing gets lost', desc: 'Anything you didn’t grab stays on your list until you do.' },
   { label: 'See where each item came from', desc: 'Every line traces back to the recipe that asked for it.' },
 ];
 const shoppingSteps = [
@@ -80,8 +80,8 @@ const choreFeatures = [
     <DeepDiveRow
       id="how-it-works" band="soft" accent="var(--color-coral)" reverse={true}
       eyebrow="Shopping & stock"
-      title="The list that builds itself — and remembers what you skipped."
-      body="Add a recipe and Kindred adds only what you’re missing, checking against what’s already in your fridge, freezer and pantry. Skip an item at the shop and it isn’t lost — it comes back on next week’s list. A coral thread shows which recipe each item came from, so nothing on the list is a mystery."
+      title="The list that builds itself — and never loses a thing."
+      body="Add a recipe and Kindred adds only what you’re missing, checking against what’s already in your fridge, freezer and pantry. Didn’t grab something this trip? It stays on your list until you do — and next week’s plan only asks for what you’re still missing. A coral thread shows which recipe each item came from, so nothing on the list is a mystery."
       features={shoppingFeatures}
       primary={{ src: '/images/08_shopping_list.png', alt: 'The shared shopping list with in-stock badges' }}
       secondary={{ src: '/images/09_stock_list.png', alt: 'Fridge, freezer and pantry stock' }}
