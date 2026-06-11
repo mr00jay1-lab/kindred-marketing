@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kindredhome.app",
+      "sha256_cert_fingerprints": [
+        "E2:AE:BD:D8:E7:39:BA:32:52:46:55:E4:9A:C3:40:DC:3C:A3:8A:9C:B0:DF:68:05:2C:7B:E3:68:B8:DA:9F:95"
+      ]
+    }
+  }
+]

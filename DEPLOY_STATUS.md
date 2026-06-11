@@ -1,5 +1,9 @@
 # Deploy status — Kindred marketing graphics handoff
 
+> **RESOLVED 2026-06-11 — historical document.** The apex was cut over to this repo
+> with auto-deploy on push to `main` (option 3 below, GitHub Pages variant).
+> See **`DEPLOY.md`** for the current publish process. `kindred-legal` is retired.
+
 _Last updated: 2026-06-09_
 
 ## TL;DR
