@@ -120,11 +120,22 @@
 .badges { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 .badges--center { justify-content: center; }
 .badge-link { display: inline-flex; border-radius: 9px; transition: transform var(--motion-standard) var(--ease-standard), opacity var(--motion-standard); }
-.badge-link:hover { transform: translateY(-2px); }
+a.badge-link:hover { transform: translateY(-2px); }
 .badge-link svg { display: block; height: 52px; width: auto; }
 .badges--pricing .badge-link svg { height: 48px; }
 .badges--footer .badge-link svg { height: 40px; opacity: 0.9; }
 .badges--final .badge-link svg { height: 56px; }
+/* Android not public yet — Google Play shown as a non-clickable "Coming soon". */
+.badge-link--soon { position: relative; cursor: default; }
+.badge-link--soon svg { opacity: 0.4; filter: grayscale(1); }
+.badge-soon {
+  position: absolute; top: -7px; right: -7px;
+  background: var(--color-primary); color: #fff;
+  font-family: var(--font-body); font-size: 0.625rem; font-weight: var(--fw-semi);
+  line-height: 1; letter-spacing: 0.02em; white-space: nowrap;
+  padding: 0.2rem 0.45rem; border-radius: var(--radius-pill);
+  box-shadow: var(--e1);
+}
 
 /* ── Trust strip ────────────────────────────────────────── */
 .trust-strip { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; align-items: center;
