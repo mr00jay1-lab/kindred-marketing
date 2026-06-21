@@ -5,8 +5,28 @@ The website half of Android App Links lives here:
 `https://kindredhome.app/.well-known/assetlinks.json`.
 
 This file is **already correct** (valid JSON, package `com.kindredhome.app`,
-a 64-hex SHA-256, no BOM). CI guards its presence + validity on every deploy.
-So the open issues are **hosting/serving**, not file content.
+a 64-hex SHA-256, no BOM) and is **byte-identical to the app-repo canonical**.
+CI guards its presence + validity on every deploy. So the open issues are
+**hosting/serving**, not file content.
+
+## Cross-repo status (as of 2026-06-21)
+
+| Piece | Owner | Status |
+|---|---|---|
+| `/join` "Failed format checks" (intent-filter) | **app repo** | ✅ Fixed — shipping in build **1.0.3+55** to Internal + Closed testing |
+| "Digital Asset Links JSON file failed" (reachability) | **website (here)** | ⏳ hosting — verify with `scripts/verify-deeplinks.sh` once egress is allowed |
+| "JSON content type failed" (MIME) | **website (here)** | ⏳ hosting — `public/_headers` forces `application/json` on non-GitHub-Pages hosts |
+
+**Source of truth:** the canonical `assetlinks.json` lives in the **app repo** at
+`legal/.well-known/assetlinks.json` and mirrors to
+`public/.well-known/assetlinks.json` here (same convention as `src/legal/*.md`).
+When the app repo changes it (e.g. adds a fingerprint), mirror the exact bytes
+here. They are currently identical.
+
+> ⚠️ The CI guard validates file *content*, not the *served* Content-Type — a
+> present-but-`text/plain` file would pass the build but still fail Play. Only
+> `scripts/verify-deeplinks.sh` (live HTTP) catches a served-MIME regression.
+> `public/_headers` pins `application/json` on Cloudflare Pages / Netlify.
 
 ## The two Play Console errors and what they mean
 
