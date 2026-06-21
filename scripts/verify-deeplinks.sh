@@ -46,7 +46,7 @@ echo "   Content-Type  : ${ctype:-<none>}"
 case "$code" in
   200) green "   ✓ 200 OK (no redirect)";;
   30*) red   "   ✗ redirect (${code}) — App Links does NOT follow redirects. Serve the file directly at the apex."; fail=1;;
-  404) red   "   ✗ 404 — file not live at this host. Confirm THIS repo's GitHub Pages deploy owns the apex (not Cloudflare/kindred-legal)."; fail=1;;
+  404) red   "   ✗ 404 — file not live at this host. Confirm THIS repo's GitHub Pages deploy owns the apex (CNAME = kindredhome.app)."; fail=1;;
   000) red   "   ✗ no response — DNS/egress/host unreachable."; fail=1;;
   *)   red   "   ✗ unexpected status ${code}"; fail=1;;
 esac

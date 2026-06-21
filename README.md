@@ -2,7 +2,7 @@
 
 Marketing landing site for [Kindred](https://kindredhome.app) — a household management app for iOS and Android.
 
-**Stack:** Astro 4 + TypeScript · Cloudflare Pages · Google Fonts (Fraunces + Inter)
+**Stack:** Astro 4 + TypeScript · GitHub Pages (auto-deploy on push to `main`) · Google Fonts (Fraunces + Inter)
 **Design:** V2 "Modern Cozy" token set, translated to CSS custom properties from the app's Flutter token files.
 
 ---
@@ -50,8 +50,8 @@ kindred-marketing/
 │   │   └── Base.astro     # HTML shell + all <head> meta
 │   ├── pages/
 │   │   ├── index.astro    # Landing page (single scroll, ~5 viewports)
-│   │   ├── privacy.astro  # /privacy — placeholder, sync from kindred-legal
-│   │   ├── terms.astro    # /terms   — placeholder, sync from kindred-legal
+│   │   ├── privacy.astro  # /privacy — renders src/legal/privacy.md
+│   │   ├── terms.astro    # /terms   — renders src/legal/terms.md
 │   │   └── 404.astro
 │   └── styles/
 │       ├── tokens.css     # V2 design tokens → CSS custom properties
@@ -63,33 +63,15 @@ kindred-marketing/
 
 ---
 
-## Cloudflare Pages deploy
+## Deploy
 
-### First-time setup
-1. Push this repo to GitHub (`mr00jay1-lab/kindred-marketing`).
-2. In Cloudflare Dashboard → Pages → Create a project → Connect to Git.
-3. Select the `kindred-marketing` repo.
-4. Build settings:
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node.js version:** 20 (set in Environment Variables: `NODE_VERSION=20`)
-5. Click **Save and Deploy**.
-
-### DNS migration (apex domain switch from GitHub Pages)
-
-The current `kindredhome.app` apex serves from GitHub Pages (`mr00jay1-lab/kindred-legal`).
-After the Cloudflare Pages project is live:
-
-1. In Cloudflare Dashboard → Pages → kindred-marketing → Custom Domains → Add `kindredhome.app`.
-2. Cloudflare will show you the required DNS records (CNAME or A records).
-3. Update DNS in your registrar (or in Cloudflare DNS if already using CF nameservers).
-4. Propagation is typically under 5 minutes on Cloudflare DNS.
-5. Verify with: `dig kindredhome.app @1.1.1.1` — should resolve to Cloudflare Pages IPs.
-6. Verify `/privacy` and `/terms` still resolve at the same paths.
-
-### Subsequent deploys
-Push to `main` → Cloudflare Pages automatically builds and deploys. ~30 seconds.
+**This repo is the single source of truth AND the host.** Push to `main` →
+GitHub Actions (`.github/workflows/deploy.yml`) builds the Astro site → deploys
+to GitHub Pages → live at https://kindredhome.app in ~2 minutes. The apex is
+owned by the tracked `public/CNAME` (`kindredhome.app`), re-asserted on every
+deploy. See **`DEPLOY.md`** for the full process, the CI guards
+(`assetlinks.json` + `CNAME`), and the Android App Links / Play deep-link setup
+(**`DEEPLINKS.md`**).
 
 ---
 
@@ -104,12 +86,10 @@ Tick these before DNS cutover:
 - [ ] Real favicon PNGs generated (16, 32, 180, 192, 512) — see `public/images/README.txt`
 - [ ] OG card image created (`public/images/og-card.png`, 1200×630)
 - [ ] Copy voice reviewed by owner (brief §4 — brief copy is ~80% ready, owner sharpens hooks)
-- [ ] `/privacy` content synced from `mr00jay1-lab/kindred-legal/docs/privacy_policy.md`
-- [ ] `/terms` content synced from `mr00jay1-lab/kindred-legal/docs/terms_of_service.md`
-- [ ] Cloudflare Web Analytics token pasted into `src/layouts/Base.astro` (search `TODO: paste Cloudflare`)
-- [ ] GitHub repo `mr00jay1-lab/kindred-marketing` created and this code pushed
-- [ ] Cloudflare Pages project created and linked to the repo
-- [ ] DNS migrated from GitHub Pages to Cloudflare Pages; propagation verified
+- [ ] `/privacy` content synced from the Kindred app repo's `legal/` (canonical) into `src/legal/privacy.md`
+- [ ] `/terms` content synced from the Kindred app repo's `legal/` (canonical) into `src/legal/terms.md`
+- [ ] Apex serves from **this repo's** GitHub Pages (`public/CNAME` = `kindredhome.app`); the domain is not claimed by any other Pages site
+- [ ] `https://kindredhome.app/.well-known/assetlinks.json` returns `200` + `application/json` (Android App Links — see `DEEPLINKS.md`)
 - [ ] `sitemap-index.xml` accessible at `https://kindredhome.app/sitemap-index.xml`
 - [ ] `robots.txt` accessible at `https://kindredhome.app/robots.txt`
 - [ ] OG / Twitter card tested via [opengraph.xyz](https://www.opengraph.xyz) on the live URL
@@ -137,10 +117,9 @@ If the app's V2 tokens change, update `src/styles/tokens.css` to match.
 
 ## Privacy / Terms pages
 
-`/privacy` and `/terms` are placeholder pages with clear TODO comments.
-The canonical content lives in `mr00jay1-lab/kindred-legal`.
-Before launch, sync by copying the rendered Markdown into the respective `.astro` files,
-or by adding `kindred-legal` as a git submodule and using `@astrojs/mdx`.
+`/privacy` and `/terms` render `src/legal/privacy.md` and `src/legal/terms.md`.
+The **canonical content lives in the Kindred app repo's `legal/`** — when it
+changes there, mirror the edit into `src/legal/*.md` here and redeploy.
 
 The URL paths `/privacy` and `/terms` must not change — they are referenced by
 App Store Connect, Play Console, and the in-app About screen.

@@ -42,6 +42,13 @@ jobs:
             if (!ok) { console.error("::error::no valid 64-hex SHA-256 fingerprint for " + PKG); process.exit(1); }
             console.log("assetlinks.json OK: " + PKG + ", " + fps.length + " fingerprint(s)");
           ' "$f"
+      - name: Guard — CNAME must pin the apex (this repo owns kindredhome.app)
+        run: |
+          c=dist/CNAME
+          test -f "$c" || { echo "::error::$c is missing — without it GitHub Pages can drop the custom domain and the apex falls back to another host with no /.well-known/assetlinks.json"; exit 1; }
+          got=$(tr -d '[:space:]' < "$c")
+          test "$got" = "kindredhome.app" || { echo "::error::CNAME is '$got', expected kindredhome.app"; exit 1; }
+          echo "CNAME OK: $got"
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
