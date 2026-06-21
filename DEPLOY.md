@@ -35,7 +35,8 @@ src/ + public/  --push to main-->  .github/workflows/deploy.yml  -->  GitHub Pag
 
 - `public/.well-known/assetlinks.json` — deleting/moving it breaks Android App Links + Play Store deep-link verification. The workflow has a guard step that fails the build if it's absent.
 - `/privacy` and `/terms` must stay reachable — they're linked from App Store Connect + Play Console.
-- `public/CNAME` must stay `kindredhome.app` — it's how **this repo** owns the apex on every deploy. Deleting it lets GitHub Pages drop the custom domain, and the apex can fall back to a host without `/.well-known/assetlinks.json` (the root cause behind the Play deep-link errors and the old `kindred-legal` drift). The workflow guards it.
+- `public/CNAME` must stay `kindredhome.app` — it's how **this repo** owns the apex on every deploy. Deleting it lets GitHub Pages drop the custom domain. The workflow guards it.
+- `public/.nojekyll` must exist — **without it GitHub Pages hides dot-folders, so `/.well-known/assetlinks.json` 404s** even though the file is in the build. This is the regression that broke Android App Links after the move to the Actions deploy. The workflow guards it.
 
 ## History (the lesson)
 
