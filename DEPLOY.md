@@ -20,7 +20,7 @@ src/ + public/  --push to main-->  .github/workflows/deploy.yml  -->  GitHub Pag
 | Static assets | `public/` | Copied verbatim into the build — images, favicons, robots.txt |
 | **Android App Links** | `public/.well-known/assetlinks.json` | **MUST stay at this exact path.** Google Play / Android verify `https://kindredhome.app/.well-known/assetlinks.json` (package `com.kindredhome.app` + release SHA-256). The CI guard step fails the build if it's missing from `dist/` |
 | Deploy workflow | `.github/workflows/deploy.yml` | Build + deploy on every push to `main` (also manual via Actions → "Run workflow") |
-| Custom domain | GitHub repo **Settings → Pages** → `kindredhome.app` | Config lives in Pages settings, not in a CNAME file. HTTPS enforced |
+| Custom domain | **`public/CNAME`** (→ `dist/CNAME`) = `kindredhome.app` | **The repo owns the apex.** The tracked `CNAME` file is re-asserted on every deploy so the domain can't silently drop to another Pages site (e.g. the retired `kindred-legal`). A CI guard fails the build if it's missing or wrong. Settings → Pages mirrors it; HTTPS enforced |
 | DNS | Registrar: apex `A` → 185.199.108/109/110/111.153, `www` CNAME → `mr00jay1-lab.github.io` | Already set; don't touch |
 
 ## Day-to-day: making a site change
@@ -35,7 +35,7 @@ src/ + public/  --push to main-->  .github/workflows/deploy.yml  -->  GitHub Pag
 
 - `public/.well-known/assetlinks.json` — deleting/moving it breaks Android App Links + Play Store deep-link verification. The workflow has a guard step that fails the build if it's absent.
 - `/privacy` and `/terms` must stay reachable — they're linked from App Store Connect + Play Console.
-- The custom domain lives in **this repo's** Pages settings. If the site ever 404s on the apex, check Settings → Pages still shows `kindredhome.app`.
+- `public/CNAME` must stay `kindredhome.app` — it's how **this repo** owns the apex on every deploy. Deleting it lets GitHub Pages drop the custom domain, and the apex can fall back to a host without `/.well-known/assetlinks.json` (the root cause behind the Play deep-link errors and the old `kindred-legal` drift). The workflow guards it.
 
 ## History (why DEPLOY_STATUS.md exists)
 
