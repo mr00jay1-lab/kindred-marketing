@@ -1,0 +1,7 @@
+# Force the Android App Links file to be served as JSON regardless of host.
+# Honored by Cloudflare Pages / Netlify; ignored (harmless) by GitHub Pages,
+# which already serves .json as application/json by extension.
+# Copied verbatim from public/ into dist/ by Astro.
+/.well-known/assetlinks.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *

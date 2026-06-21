@@ -25,8 +25,23 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Guard — assetlinks.json must be in the build
-        run: test -f dist/.well-known/assetlinks.json
+      - name: Guard — assetlinks.json must be present, valid JSON, and correct
+        run: |
+          f=dist/.well-known/assetlinks.json
+          test -f "$f" || { echo "::error::$f is missing from the build"; exit 1; }
+          node -e '
+            const fs = require("fs");
+            const PKG = "com.kindredhome.app";
+            const raw = fs.readFileSync(process.argv[1], "utf8");
+            if (raw.charCodeAt(0) === 0xFEFF) { console.error("::error::assetlinks.json has a UTF-8 BOM — Google will reject it"); process.exit(1); }
+            let d; try { d = JSON.parse(raw); } catch (e) { console.error("::error::assetlinks.json is not valid JSON: " + e.message); process.exit(1); }
+            const stmt = (Array.isArray(d) ? d : []).find(s => s?.target?.package_name === PKG);
+            if (!stmt) { console.error("::error::no Digital Asset Links statement for " + PKG); process.exit(1); }
+            const fps = stmt.target.sha256_cert_fingerprints || [];
+            const ok = fps.some(x => /^[0-9A-Fa-f:]+$/.test(x) && x.replace(/:/g, "").length === 64);
+            if (!ok) { console.error("::error::no valid 64-hex SHA-256 fingerprint for " + PKG); process.exit(1); }
+            console.log("assetlinks.json OK: " + PKG + ", " + fps.length + " fingerprint(s)");
+          ' "$f"
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
