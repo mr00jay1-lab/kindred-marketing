@@ -37,10 +37,12 @@ Play Console → **Test and release → Grow → Deep links → `kindredhome.app
 | **Digital Asset Links JSON file failed** | Google didn't get a clean `200` for the file at the apex — it got a redirect or a 404. | Make the file reachable with a **direct 200** (no redirect) at `https://kindredhome.app/.well-known/assetlinks.json`. |
 | **JSON content type failed** | The response wasn't `application/json` — almost always because the request landed on the HTML 404 page or a redirect, not the real file. | Same root cause as above; once the real JSON file is served, GitHub Pages sends `application/json` automatically. |
 
-Both errors share one root cause: **the apex is probably still fronted by the
-old host** (Cloudflare Pages / `kindred-legal`, per `DEPLOY_STATUS.md`) which
-does not have `.well-known/assetlinks.json`, instead of **this repo's GitHub
-Pages deploy**, which does.
+Both errors share one root cause: **the apex custom domain is still claimed by a
+different GitHub Pages site** (the retired `kindred-legal`), which has no
+`.well-known/assetlinks.json`, instead of **this repo's GitHub Pages deploy**,
+which does. GitHub Pages domains are exclusive — `kindred-legal` must release
+`kindredhome.app` before this repo (which now ships a tracked `CNAME`) can serve
+the apex. See `DEPLOY.md`.
 
 > `/join` also shows **"Failed format checks"** — that is the
 > `<intent-filter>` in the **Android app's `AndroidManifest.xml`**, NOT this

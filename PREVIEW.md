@@ -18,31 +18,22 @@ real-screenshot **gallery** (Light/Dark toggle) · **Shopping & stock** (+ 3-ste
 Plus a `/features` full tour (all 17 app screenshots). 20 real app screenshots, generated
 favicons + OG card. Designed by a 5-persona workflow; built parent-direct.
 
-## How it's hosted (important)
-`kindredhome.app` is served by GitHub Pages from the **`mr00jay1-lab/kindred-legal`** repo
-(`docs/` on `main`, with the `CNAME`). The built marketing site lives there now (`.nojekyll`
-+ the Astro `dist`), **replacing the old legal-only Jekyll site** — same domain, same cert,
-no DNS change.
+## How it's hosted
+**This repo is the source AND the host.** Push to `main` → GitHub Actions builds
+the Astro site → deploys to GitHub Pages → live at `kindredhome.app`. The apex is
+owned by the tracked `public/CNAME`. Full process in **`DEPLOY.md`**; Android App
+Links / Play deep-link details in **`DEEPLINKS.md`**.
 
-- **Site SOURCE** → `mr00jay1-lab/kindred-marketing` (`main`). Edit + `npm run build` here.
-- **Apex DEPLOY** → copy this repo's `dist/*` into `kindred-legal/docs/` (keep `CNAME` +
-  `.well-known/assetlinks.json` + add `.nojekyll`), commit + push `kindred-legal` `main`.
-- `/privacy` + `/terms` render the canonical legal markdown (`src/legal/*.md`, synced from
-  the Kindred repo's `legal/`), so the store-referenced URLs are unchanged. App Links
-  `/.well-known/assetlinks.json` is preserved + still Google-verified.
-
-### ⚠️ New legal-edit flow (changed by the apex move)
-Legal edits now flow: Kindred repo `legal/*.md` (canonical) → copy into
-`kindred-marketing/src/legal/*.md` → `npm run build` → redeploy `dist` to `kindred-legal/docs`.
-(Previously you edited `kindred-legal/docs/privacy.md` directly under Jekyll.)
+- **Site SOURCE + HOST** → `mr00jay1-lab/kindred-marketing` (`main`). Edit, push, done.
+- `/privacy` + `/terms` render `src/legal/*.md` (canonical content mirrored from the
+  Kindred app repo's `legal/`), so the store-referenced URLs are unchanged. App Links
+  `/.well-known/assetlinks.json` ships in the build and is CI-guarded.
 
 ## Still to do before public launch (owner)
 - **Swap the placeholder store badges** (`src/components/StoreBadges.astro`) for official
   Apple/Google artwork + real store URLs (they currently link to `#`; apps aren't public yet).
 - Optional: a dedicated marketing identity, real testimonials, a promo video.
-- The Cloudflare-Pages route in `marketing_site_brief.md` is now **optional** — the apex is
-  already served from GitHub. Move to Cloudflare later only if you want its analytics/edge.
 
 ## Rollback
-If anything on the apex needs reverting: `git -C kindred-legal revert df20ba8` (or reset to
-`1fce9e6`) + push — restores the previous legal-only site.
+Revert the offending commit on `main` and push — the deploy workflow republishes
+automatically. No separate host or manual copy step is involved.

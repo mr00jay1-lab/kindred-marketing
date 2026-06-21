@@ -37,6 +37,6 @@ src/ + public/  --push to main-->  .github/workflows/deploy.yml  -->  GitHub Pag
 - `/privacy` and `/terms` must stay reachable — they're linked from App Store Connect + Play Console.
 - `public/CNAME` must stay `kindredhome.app` — it's how **this repo** owns the apex on every deploy. Deleting it lets GitHub Pages drop the custom domain, and the apex can fall back to a host without `/.well-known/assetlinks.json` (the root cause behind the Play deep-link errors and the old `kindred-legal` drift). The workflow guards it.
 
-## History (why DEPLOY_STATUS.md exists)
+## History (the lesson)
 
-Until 2026-06-11 the apex was served by GitHub Pages from a **separate repo** (`mr00jay1-lab/kindred-legal`, `main` branch `/docs` folder), and publishing meant hand-copying `dist/` into that repo. That copy step was missed (stale site) and risked dropping `assetlinks.json`. The domain was cut over to this repo + auto-deploy on 2026-06-11; `kindred-legal` is retired and safe to delete.
+The apex used to be served by GitHub Pages from a **separate, retired repo** and published by hand-copying `dist/` into it — which drifted, went stale, and risked dropping `assetlinks.json`. Ownership lived only in a Pages **setting**, so the domain could silently fall back to that other site (with no App Links file) — the root cause behind the Play deep-link errors. The durable fix is in place: this repo auto-deploys on push to `main` and **pins the apex with a tracked `public/CNAME`**, guarded in CI. The retired repo must not hold the `kindredhome.app` custom domain — if the apex 404s, confirm no other Pages site claims it.
