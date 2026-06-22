@@ -65,3 +65,21 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+  verify-live:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe the live apex for assetlinks.json
+        run: |
+          url="https://kindredhome.app/.well-known/assetlinks.json"
+          ok=0
+          for i in $(seq 1 12); do
+            echo "=================== attempt $i ==================="
+            code=$(curl -sS -o /tmp/body -w '%{http_code}' -D /tmp/hdr "$url?cachebust=$i" || echo 000)
+            echo "STATUS: $code"
+            echo "----- response headers -----"; cat /tmp/hdr || true
+            echo "----- body (first 400 bytes) -----"; head -c 400 /tmp/body; echo
+            if [ "$code" = "200" ]; then ok=1; echo "LIVE 200 OK"; break; fi
+            sleep 15
+          done
+          if [ "$ok" != "1" ]; then echo "::warning::apex still not serving assetlinks.json (last status above)"; fi
