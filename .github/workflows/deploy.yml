@@ -53,9 +53,23 @@ jobs:
           got=$(tr -d '[:space:]' < "$c")
           test "$got" = "kindredhome.app" || { echo "::error::CNAME is '$got', expected kindredhome.app"; exit 1; }
           echo "CNAME OK: $got"
-      - uses: actions/upload-pages-artifact@v5
+      # actions/upload-pages-artifact@v5 strips hidden files (.well-known, .nojekyll),
+      # which made /.well-known/assetlinks.json 404 at the apex. Package the tar
+      # ourselves (GNU tar of `.` includes dotfiles) and verify they survive.
+      - name: Package Pages artifact (preserve hidden .well-known / .nojekyll)
+        run: |
+          tar --dereference --hard-dereference -C dist -cvf "$RUNNER_TEMP/artifact.tar" --exclude=.git --exclude=.github . >/dev/null
+          echo "===== artifact.tar dotfile check ====="
+          tar -tf "$RUNNER_TEMP/artifact.tar" | grep -E '\.well-known|\.nojekyll|CNAME' || true
+          tar -tf "$RUNNER_TEMP/artifact.tar" | grep -q '\./\.well-known/assetlinks\.json' \
+            || { echo "::error::.well-known/assetlinks.json missing from artifact tar"; exit 1; }
+      - name: Upload Pages artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          include-hidden-files: true
   deploy:
     needs: build
     runs-on: ubuntu-latest
