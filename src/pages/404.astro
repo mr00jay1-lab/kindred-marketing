@@ -9,6 +9,16 @@ import '../styles/global.css';
   description="The page you're looking for doesn't exist."
   noindex={true}
 >
+  <script is:inline>
+    // Invite links (/join/<token>) 404 on static hosting because the token is
+    // unknown at build time. Redirect to /join/ which IS pre-built, preserving
+    // ?code= so the invite-code block can still be shown.
+    (function () {
+      if (/^\/join\/.+/.test(location.pathname)) {
+        location.replace('/join/' + location.search);
+      }
+    })();
+  </script>
   <main class="not-found section" id="main-content" tabindex="-1">
     <div class="container not-found__inner">
       <p class="label not-found__code">404</p>
