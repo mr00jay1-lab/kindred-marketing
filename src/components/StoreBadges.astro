@@ -1,9 +1,8 @@
 ---
 // App Store + Google Play badges. variant: hero | pricing | footer | final.
-// iOS is LIVE on the App Store. Android is not public yet (Play Closed/Internal),
-// so the Google Play badge is shown as a non-clickable "Coming soon" placeholder
-// — no dead-end link — until the public Play listing exists.
+// Both iOS and Android are live.
 const APP_STORE_URL = 'https://apps.apple.com/app/id6765523684';
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.kindredhome.app';
 export interface Props {
   variant?: string;
   center?: boolean;
@@ -22,10 +21,10 @@ const cls = `badges badges--${variant}${center ? ' badges--center' : ''}`;
       <text x="36" y="29" fill="#fff" font-family="-apple-system, 'SF Pro Display', Inter, Arial, sans-serif" font-size="13" font-weight="600">App Store</text>
     </svg>
   </a>
-  <span class="badge-link badge-link--soon" role="img"
-        aria-label="Kindred for Android — coming soon to Google Play"
-        data-analytics={`store-google-soon-${variant}`}>
-    <svg viewBox="0 0 135 40" role="img" aria-label="Get it on Google Play — coming soon" xmlns="http://www.w3.org/2000/svg">
+  <a href={GOOGLE_PLAY_URL} class="badge-link" target="_blank" rel="noopener noreferrer"
+     aria-label="Get Kindred on Google Play"
+     data-analytics={`store-google-${variant}`}>
+    <svg viewBox="0 0 135 40" role="img" aria-label="Get it on Google Play" xmlns="http://www.w3.org/2000/svg">
       <rect width="135" height="40" rx="8" fill="#000"></rect>
       <polygon points="13,9 13,31 24.5,20" fill="#00D0FF"></polygon>
       <polygon points="13,9 24.5,20 30,14.7 16.2,7" fill="#00F076"></polygon>
@@ -34,6 +33,5 @@ const cls = `badges badges--${variant}${center ? ' badges--center' : ''}`;
       <text x="42" y="16" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="6" font-weight="400" letter-spacing="0.5">GET IT ON</text>
       <text x="42" y="29" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Google Play</text>
     </svg>
-    <span class="badge-soon">Coming soon</span>
-  </span>
+  </a>
 </div>
