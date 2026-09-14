@@ -1,11 +1,9 @@
 # Kindred — Privacy Policy
 
 **Effective date:** 25 April 2026
-**Last updated:** 25 April 2026
-**Data controller:** Jay Tanna, 15 Eagles Heath, Bedford, MK42 7NN.
+**Last updated:** 14 September 2026
+**Data controller:** Jay Tanna, 30 Swallow Drive, Syston, Leicester, LE7 1ZN.
 **Contact:** support@kindredhome.app
-
-> ⚠️ **Owner: this is a starter draft, not legal advice.** It covers the App Store / Play Store / UK GDPR basics so you can publish a URL during phase 4 development. Have a solicitor review it before phase 10 public release.
 
 ---
 
@@ -144,9 +142,5 @@ We will update this policy when we add features that change what data we collect
 Questions, requests, or complaints? Write to:
 
 Jay Tanna
-15 Eagles Heath, Bedford, MK42 7NN
+30 Swallow Drive, Syston, Leicester, LE7 1ZN
 Email: support@kindredhome.app (general) · legal@kindredhome.app (data-protection / GDPR rights requests)
-
----
-
-*This policy was generated as a starter draft for Kindred phase 4 development. Review by qualified legal counsel before public app store release.*

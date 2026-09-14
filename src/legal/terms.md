@@ -1,11 +1,9 @@
 # Kindred — Terms of Service
 
 **Effective date:** 25 April 2026
-**Last updated:** 25 April 2026
-**Service operator:** Jay Tanna, 15 Eagles Heath, Bedford, MK42 7NN.
+**Last updated:** 14 September 2026
+**Service operator:** Jay Tanna, 30 Swallow Drive, Syston, Leicester, LE7 1ZN.
 **Contact:** support@kindredhome.app
-
-> ⚠️ **Owner: this is a starter draft, not legal advice.** It covers the App Store / Play Store / UK consumer law basics so you can publish a URL during phase 4 development. Have a solicitor review it before phase 10 public release.
 
 ---
 
@@ -171,9 +169,5 @@ If you have a complaint, please contact us first at legal@kindredhome.app so we 
 ## 18. Contact
 
 Jay Tanna
-15 Eagles Heath, Bedford, MK42 7NN
+30 Swallow Drive, Syston, Leicester, LE7 1ZN
 Email: support@kindredhome.app (general) · legal@kindredhome.app (legal notices / disputes under §16)
-
----
-
-*These Terms were generated as a starter draft for Kindred phase 4 development. Review by qualified legal counsel before public app store release.*
